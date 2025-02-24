@@ -1,0 +1,27 @@
+class Solution {
+    public int largestCombination(int[] candidates) {
+        
+        String[] binary = new String[candidates.length];
+        int minBits = 24;
+
+        for(int i = 0; i < binary.length; i++){
+            String s = Integer.toBinaryString(candidates[i]);
+            binary[i] = String.format("%" + 24 +"s",s.replace(' ','0'));
+        }
+
+        int count = 0;
+
+        for(int i = 0; i < 24; i++){
+            int temp = 0;
+            for(int j = 0; j < binary.length; j++){
+                if(binary[j].charAt(i) == '1'){
+                    temp++;
+                }
+            }
+            if(temp > count) count = temp;
+        }
+
+        return count;
+    }
+}
+

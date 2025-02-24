@@ -1,0 +1,66 @@
+class Node {
+
+    Node next;
+    int val;
+
+    Node(int val, Node next){
+        this.val = val;
+        this.next = next;
+    }
+}
+
+class MinStack {
+
+    Node head;
+    int min;
+
+    public MinStack() {
+       Node head = null; 
+    }
+    
+    public void push(int val) {
+
+        if(head != null){
+            if(val < min) {min = val;}
+        }
+        Node temp = new Node(val, null);
+        temp.next = head;
+        head = temp;
+        
+    }
+    
+    public void pop() {
+
+        head = head.next;
+        
+    }
+    
+    public int top() {
+
+        return head.val;
+        
+    }
+    
+    public int getMin() {
+        Node temp = head;
+        int i = temp.val;
+        while(temp != null){
+            if(temp.val < i){
+                i = temp.val;
+            }
+            temp = temp.next;
+        }
+        return i;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+
+ 

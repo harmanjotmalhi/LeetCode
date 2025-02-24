@@ -1,0 +1,34 @@
+import java.util.StringTokenizer;
+class Solution {
+    public boolean isCircularSentence(String sentence) {
+        
+        if(!sentence.isEmpty()){
+
+            if(sentence.charAt(0) == ' ' || sentence.charAt(sentence.length()-1) == ' ') 
+                return false;
+
+            if(sentence.charAt(0) != sentence.charAt(sentence.length()-1))
+                return false;
+        }
+
+        StringTokenizer tokenizer = new StringTokenizer(sentence, " ");
+
+        StringBuilder prev = new StringBuilder(tokenizer.nextToken());
+        StringBuilder current = new StringBuilder();
+
+        while(tokenizer.hasMoreTokens()){
+
+            current.append(tokenizer.nextToken());
+            if(prev.charAt(prev.length()-1) != current.charAt(0)){
+                return false;
+            }
+
+            prev.setLength(0);
+            prev.append(current);
+            current.setLength(0);
+
+        }
+
+        return true;
+    }
+}

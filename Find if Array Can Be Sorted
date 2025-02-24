@@ -1,0 +1,65 @@
+class Solution {
+    public boolean canSortArray(int[] nums) {
+
+        
+        
+        for(int i = 0; i < nums.length; i++){
+
+            boolean swapped = false;
+            for(int j = 1; j < nums.length; j++){ 
+                if(nums[j-1] > nums[j] && sameBits(nums[j-1],nums[j])){
+                    int temp = nums[j-1];
+                    nums[j-1] = nums[j];
+                    nums[j] = temp;
+                    swapped = true;
+                }
+            }
+
+            if(!swapped) break;
+        }
+
+        if(isSorted(nums)) return true;
+        else return false;
+
+
+    }
+
+    public boolean sameBits(int i, int j){
+
+        String tempi = Integer.toBinaryString(i);
+
+        int counti = 0;
+
+        for(int indexi = 0; indexi < tempi.length(); indexi++){
+
+            if(tempi.charAt(indexi) == '1') counti++;
+        }
+
+        String tempj = Integer.toBinaryString(j);
+
+        int countj = 0;
+
+        for(int indexj = 0; indexj < tempj.length(); indexj++){
+
+            if(tempj.charAt(indexj) == '1') countj++;
+        }
+
+        if(counti == countj) return true;
+        else return false;
+    }
+
+    public boolean isSorted(int nums[]){
+
+        boolean not = true;
+
+        for(int i = 1; i < nums.length; i++){
+
+            if(nums[i-1] > nums[i]) {
+                not = false;
+                break;
+            }
+        }
+
+        return not;
+    }
+}

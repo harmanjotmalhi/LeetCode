@@ -1,0 +1,33 @@
+class Solution {
+    public int maxCount(int[] banned, int n, int maxSum) {
+
+    Arrays.sort(banned);
+
+    boolean[] ban = new boolean[n+1];
+
+    for(int i = 0; i < ban.length; i++){
+        ban[i] = false;
+    }  
+    for(int i = 0; i < banned.length; i++){
+        if(!(banned[i] > n))
+            ban[banned[i]] = true;
+    }  
+
+    int num = 0;
+    int count = 0;
+    for(int i = 0; i < ban.length; i++){
+        if(ban[i] != true){
+            if(num + i > maxSum){
+                break;
+            }
+            else{
+                num = num + i;
+                count++;
+            }
+        }
+    }
+
+    int result = count -1;
+    return result;  
+    }
+}

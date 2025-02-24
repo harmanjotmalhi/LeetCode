@@ -1,0 +1,81 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        
+        ListNode temp1 = list1;
+        ListNode temp2 = list2;
+
+        ListNode main = new ListNode();
+
+        if(temp1 == null) {
+            main = temp2;
+            if(temp2 != null)
+            temp2 = temp2.next;
+            }
+
+        else if (temp2 == null) {
+            main = temp1;
+            if(temp1 != null)
+            temp1 = temp1.next;
+            }
+
+        else if(temp1 == null && temp2 == null) return null;
+
+        else if(temp1.val <= temp2.val) {
+            main = temp1;
+            temp1 = temp1.next;
+        }
+
+        else if(temp2.val < temp1.val){
+            main = temp2;
+            temp2 = temp2.next;
+        }
+
+
+
+
+        ListNode temp = main;
+
+
+
+        while(temp1 != null || temp2 != null){
+
+            if(temp1 == null) {
+                System.out.println("1");
+                temp.next = temp2;
+                temp = temp.next;
+                temp2 = temp2.next;
+            }
+            else if(temp2 == null){
+                System.out.println("2");
+                temp.next = temp1;
+                temp = temp.next;
+                temp1 = temp1.next;
+            }
+            else if(temp1.val <= temp2.val){
+                System.out.println("3");
+                temp.next = temp1;
+                temp = temp.next;
+                temp1 = temp1.next;
+            }
+            else if(temp2.val < temp1.val){
+                System.out.println("4");
+                temp.next = temp2;
+                temp = temp.next;
+                temp2 = temp2.next;
+            }   
+        }
+
+        return main;
+
+    }       
+}

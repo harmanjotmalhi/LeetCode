@@ -1,0 +1,32 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        int[] ss = new int[26];
+        int[] tt = new int[26];
+
+        
+
+        for(char c : s.toCharArray()){
+
+            int asci = (int)c;
+            ss[asci-97] = ss[asci-97] + 1;
+        }
+
+        for(char c : t.toCharArray()){
+
+            int asci = (int)c;
+            tt[asci-97] = tt[asci-97] + 1;
+        }
+
+        boolean is_anagram = true;
+        for(int i = 0; i < ss.length; i++){
+
+            if(ss[i] != tt[i]){
+                is_anagram = false;
+                break;
+            }
+        }
+
+        return is_anagram;
+    }
+}

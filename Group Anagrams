@@ -1,0 +1,66 @@
+import java.util.*;
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+
+        String [] t = new String[strs.length];
+
+        for(int i = 0; i < strs.length; i++){
+
+            t[i] = strs[i];
+        }
+
+        for(int i = 0; i < strs.length; i++){
+            char [] charArray = strs[i].toCharArray();
+            Arrays.sort(charArray);
+            String temp = new String(charArray);
+            strs[i] = temp;
+        }
+
+        HashMap<String,Integer> map = new HashMap<>();
+
+        int[] type = new int[strs.length];
+
+        int value = 0;
+        for(int i = 0; i < type.length; i++){
+
+            if(map.containsKey(strs[i])){
+                type[i] = map.get(strs[i]);
+            }else{
+                map.put(strs[i],value);
+                value++;
+                type[i] = map.get(strs[i]);
+            }
+        }
+
+for(String e : strs){
+
+            System.out.println(e);
+        }
+        for(int e : type){
+
+            System.out.println(e);
+        }
+
+
+
+        List<List<String>> a = new ArrayList<>();
+        
+        for(int i = 0; i < value; i++){
+
+            List<String> f = new ArrayList<>();
+
+            a.add(f);
+        }
+   
+        for(int i = 0; i < strs.length; i++){
+            List<String> b = a.get(type[i]);
+            b.add(t[i]);
+            System.out.println(t[i]);
+        
+   }
+        return a;
+    }
+
+}

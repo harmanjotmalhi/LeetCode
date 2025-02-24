@@ -1,0 +1,86 @@
+import java.util.*;
+import java.util.LinkedList;
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+
+    System.out.println(s.length());
+       LinkedList<Character> best = new LinkedList<>();
+       int index = 0;
+       if(s.length() > 0){
+       while(check(best,s.charAt(index)) == false){
+           best.add(s.charAt(index));
+           index++;
+           if(index >= s.length()) break;
+       }
+       
+
+       
+       int temp;
+       LinkedList<Character> tooCheck = new LinkedList<>();
+       
+
+
+       for(int i = 1; i < s.length(); i++){  
+           if(checktosee(s) > 50){
+            break;
+        } 
+           temp = i;
+           int count = 0;
+           while(check(tooCheck,s.charAt(temp)) == false){
+           //System.out.println(1);
+           count++;
+           tooCheck.add(s.charAt(temp));
+           temp++;
+           if(temp >= s.length()) break;
+       }
+       
+
+        
+        
+       
+    
+        
+            if(count > index){
+                
+                best.clear();
+                best.addAll(tooCheck);
+                index = count;
+            }
+
+            tooCheck.clear();
+       }
+
+
+
+
+
+       for(char e : best){
+           System.out.println(e);
+       }
+       }
+
+       return index;
+    }
+
+    public int checktosee(String s){
+
+
+
+ int count = 0;
+    if(s.length() >= 10000){
+        int j = 0;
+        for(int i = 0; i < 100; i++){
+            
+            if(s.charAt(j) == s.charAt(j+95)) count++;
+            j = j + 95;
+     }
+    }
+        return count;
+    }
+    public boolean check(LinkedList l, char a){
+
+        if(l.contains(a)) return true;
+
+        else return false;
+    }
+}

@@ -1,0 +1,82 @@
+import java.math.BigInteger;
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        
+        BigInteger store1 = new BigInteger("0");
+        BigInteger store2 = new BigInteger("0");
+        BigInteger multiplier = new BigInteger("1");
+
+        ListNode temp = l1;
+
+        while(temp != null){
+            if(temp.val != 0){
+                store1 = store1.add((multiplier.multiply(BigInteger.valueOf(temp.val))));
+                System.out.println(store1);
+                multiplier = multiplier.multiply(BigInteger.valueOf(10));
+                temp = temp.next;
+            }else{
+               
+                System.out.println(store1);
+                multiplier = multiplier.multiply(BigInteger.valueOf(10));
+                temp = temp.next;
+            }
+        
+        }
+
+        temp = l2;
+        multiplier = new BigInteger("1");
+        while(temp != null){
+            if(temp.val != 0){
+                store2 = store2.add((multiplier.multiply(BigInteger.valueOf(temp.val))));
+                System.out.println(store2);
+                multiplier = multiplier.multiply(BigInteger.valueOf(10));
+                temp = temp.next;
+            }else{
+                System.out.println(store2);
+                multiplier = multiplier.multiply(BigInteger.valueOf(10));
+                temp = temp.next;
+            }
+        }
+        System.out.println("First number: "+store1);
+        System.out.println("Second number: "+store2);
+
+        BigInteger result = new BigInteger(store1.add(store2).toString());
+        System.out.println(result);
+
+        int remainder = result.remainder(BigInteger.valueOf(10)).intValue();
+
+
+        ListNode rr = new ListNode(remainder,null);
+
+        result = result.divide(BigInteger.valueOf(10));
+
+        ListNode p = rr;
+
+        while ( result.compareTo(BigInteger.ZERO) > 0){
+
+            int current = result.remainder(BigInteger.valueOf(10)).intValue();
+            ListNode newnew = new ListNode(current,null);
+            
+            p.next = newnew;
+            p = p.next;
+            result = result.divide(BigInteger.valueOf(10));;
+            
+        }
+
+
+
+        return rr;
+    }
+    }
+    

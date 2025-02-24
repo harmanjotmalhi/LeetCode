@@ -1,0 +1,80 @@
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+class Solution {
+    public String longestPalindrome(String s) {
+        
+        int [][] memo = new int [s.length()][s.length()];
+
+        String t = "";
+
+        for(int i = s.length()-1; i >=0; i--){
+            
+            t = t + s.charAt(i);
+        }
+
+        for(int i = 0; i < s.length(); i++){
+            for(int j = 0; j < t.length(); j++){
+                if(t.charAt(j) == s.charAt(i)){
+                    if(i == 0 || j == 0){
+                        memo[i][j] = 1;
+                    }
+                    else{
+                        memo[i][j] = memo[i-1][j-1] + 1;
+                    }
+                }
+            }
+        }
+        
+        String ret = "";
+        do{
+        int largest = 0;
+        int str_ind = 0;
+        int sv_i = 0;
+        for(int i = 0; i < s.length(); i++){
+            for(int j = 0; j < t.length(); j++){
+
+                if(memo[i][j] > largest){
+                    largest = memo[i][j];
+                    sv_i = i;
+                    str_ind = j;
+                }
+            }
+            }
+
+            int temp = str_ind;
+            ret = "";
+            for(int i = largest; i > 0; i--){
+                ret = ret + t.charAt(temp);
+                temp--;
+            }
+            if(check(ret) == false) {memo[sv_i][str_ind] = 0;}
+        }
+        while(check(ret) == false);
+
+
+            
+            
+            return ret;
+
+
+        
+    }
+
+    public boolean check(String one){
+
+    String t = "";
+
+        for(int i = one.length()-1; i >=0; i--){
+            
+            t = t + one.charAt(i);
+        }
+
+        if(one.equals(t)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}

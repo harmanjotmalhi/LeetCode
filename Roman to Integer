@@ -1,0 +1,46 @@
+class Solution {
+    public int romanToInt(String s) {
+
+        //s = "llllllllll";
+        s = s.toUpperCase();
+
+        int convert = 0;
+        
+        char [] roms = {'I', 'V', 'X', 'L', 'C', 'D', 'M'};
+        int [] nums = {1, 5, 10, 50, 100, 500, 1000};
+
+        int k = s.length();
+        
+        for(int i = 0; i < s.length(); i++){
+            System.out.println(convert);
+            if(i == s.length() - 1) {
+                int store = returnIndex(roms, s.charAt(i));
+                    convert = convert + nums[store];
+            }
+            else{
+            int store = returnIndex(roms, s.charAt(i));
+            int nextInd = returnIndex(roms, s.charAt(i + 1));
+                if(nums[store] < nums[nextInd]){
+                    convert = convert + (nums[nextInd] - nums[store]);
+                    i++;
+                }
+                else{
+                    convert = convert + nums[store];
+                }
+            
+            }
+            
+        }
+        return convert;
+    }
+
+    public int returnIndex(char [] roms, char t){
+
+        for(int i = 0; i < roms.length; i++){
+            if(roms[i] == t){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
